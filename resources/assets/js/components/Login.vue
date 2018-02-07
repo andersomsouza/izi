@@ -61,13 +61,27 @@
     let loginConroller = new LoginController();
     export default {
         name: "login",
-        props:['error'],
+        data(){
+            return {'error':''}
+        },
+        created(){
+
+            if(this.$root.login){
+                if(this.$root.login.email)
+                this.$router.push({name: 'dash_home'});
+            }
+        } ,
         methods:{
             login(){
                 let formData = new FormData(document.querySelector('form'));
                 loginConroller.login(formData)
-                    .then(()=>{
-                        this.$router.push('/dash');
+                    .then((json)=>{
+                        console.log(json);
+
+                        console.log("chegou aq");
+                        this.$root.login = json;
+                        this.$router.push({name: 'dash_home'});
+
                     })
                     .catch(e=>this.error = e);
             }

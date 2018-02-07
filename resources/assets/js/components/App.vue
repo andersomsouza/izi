@@ -9,34 +9,31 @@
 <script>
     import Login from './Login';
     import APIHelper from "../domain/Helpers/APIHelper";
+    import LoginController from "../domain/Controllers/LoginController";
 
     export default {
-        data(){
+        data() {
             return {
-                carregado : false
+                carregado: false
             }
         },
         components: {
             'login': Login
         },
-       created() {
-            let apiHelper = new APIHelper();
-            apiHelper._get("/login")
-                .then((r) => r.json())
+        created() {
+            let loginController = new LoginController();
+            loginController.isLogado("/login")
                 .then(json => {
-                        if (!json.error) {
-                            this.$root.login = json;
-                            this.$router.push("/dash")
-                        }else{
-                            this.$router.push("/login")
-                        }
+                        this.$root.login = json;
                         this.carregado = true;
+                        this.$router.push("/dash")
                     }
                 )
-                .catch(()=>{
-                    this.$router.push("/login")
-                    this.carregado = true}
-                    )
+                .catch(() => {
+                        this.carregado = true
+                        this.$router.push("/login")
+                    }
+                )
         }
     }
 </script>
@@ -46,13 +43,13 @@
         padding-left: 300px;
     }
 
-    @media only screen and (max-width : 992px) {
+    @media only screen and (max-width: 992px) {
         body {
             padding-left: 0;
         }
     }
 
-    h1{
+    h1 {
         display: block;
         margin-top: 1.5rem;
         text-align: center;
@@ -63,7 +60,7 @@
         text-transform: uppercase;
     }
 
-    h2{
+    h2 {
         display: block;
         font-weight: normal;
         font-size: 15px;
@@ -72,7 +69,8 @@
         text-transform: uppercase;
         margin: 10px 100px 0 0;
     }
-    a{
+
+    a {
         color: #4e8180 !important;
     }
 </style>

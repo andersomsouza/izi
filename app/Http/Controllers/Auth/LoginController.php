@@ -159,9 +159,9 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 
-        $request->session()->invalidate();
-
-        return redirect('/');
+        //$request->session()->invalidate();
+        session()->regenerate(true);
+        return response()->json(["ok"=>"Deslogado com sucesso", "novoToken"=>session()->token()]);
     }
 
     /**

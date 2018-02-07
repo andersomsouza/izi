@@ -12,9 +12,11 @@
 <script>
     import APIHelper from './../../domain/Helpers/APIHelper'
     import Sidebar from '../shared/Sidebar';
+    import LoginController from "../../domain/Controllers/LoginController";
+
     export default {
         name: "dashboard",
-        components:{
+        components: {
             'izi-sidebar': Sidebar
         },
         data() {
@@ -24,16 +26,11 @@
         },
         created() {
             console.log("dash criada")
-            let apiHelper = new APIHelper();
+            let loginController = new LoginController();
             if (!this.$root.login)
-                apiHelper._get("/login")
-                    .then((r) => r.json())
+                loginController.isLogado()
                     .then(json => {
-                            if (!json.error) {
-                                this.$root.login = json;
-                            } else {
-                                this.$router.push("/login")
-                            }
+                            this.$router.push("/login")
                             this.carregado = true;
                         }
                     )

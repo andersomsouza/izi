@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <h1>Dispositivos</h1>
-    </div>
+
 </template>
 
 <script>
     export default {
-        name: "dispositivos"
+        name: "home"
     }
 </script>
 
 <style scoped>
+
 
 </style>

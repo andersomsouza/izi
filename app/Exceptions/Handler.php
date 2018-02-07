@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($exception instanceof TokenMismatchException){
-            return response()->json(["error"=>"Sessão expirada"],410);
+            return response()->json(["error"=>"Sessão expirada", "novoToken"=>session()->token()],410);
         }
         return parent::render($request, $exception);
     }

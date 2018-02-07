@@ -16,5 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login','Auth\LoginController@getLogin');
+Route::get('/logout','Auth\LoginController@logout')->middleware('auth');
 Route::post('/login','Auth\LoginController@login');
+
 Route::get('/home', 'HomeController@index')->name('home');
