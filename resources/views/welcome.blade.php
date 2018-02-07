@@ -64,9 +64,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
             <div id="app"></div>
-        </div>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>

@@ -1,7 +1,8 @@
 <template>
     <div v-if="carregado">
-        <h1>Dashboard</h1>
+        <izi-sidebar>
 
+        </izi-sidebar>
         <router-view>
 
         </router-view>
@@ -10,9 +11,12 @@
 
 <script>
     import APIHelper from './../../domain/Helpers/APIHelper'
-
+    import Sidebar from '../shared/Sidebar';
     export default {
         name: "dashboard",
+        components:{
+            'izi-sidebar': Sidebar
+        },
         data() {
             return {
                 carregado: false
