@@ -1,0 +1,100 @@
+
+body {
+    padding-left: 300px;
+  }
+
+@media only screen and (max-width : 992px) {
+    body {
+      padding-left: 0;
+    }
+  }
+.side-nav li>a {
+    margin: 1rem 0 1rem 0;
+    color: rgba(0,0,0,0.87);
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 32px;
+}
+
+.side-nav{
+    overflow: hidden;
+}
+
+.side-nav:hover{
+    overflow: auto;
+}
+.side-footer{
+    margin: 0px !important;
+    background-color: #263238;
+    position: fixed;
+    bottom: 0px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    width: 100%;
+    padding: 0px !important;
+    cursor: inherit;
+}
+.side-footer:hover{
+    background-color: #263238 !important;
+}
+
+
+.side-nav li>a:hover {
+    background-color: transparent;
+}
+.side-nav .divider {
+    margin: 0;
+}
+.side-nav li{
+    width: 100%;
+}
+.side-nav li:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+h1{
+    display: block;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: 1em;
+    color: #29b7b2;
+    text-transform: uppercase;
+}
+
+h2{
+    display: block;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1em;
+    color: #29b7b2;
+    text-transform: uppercase;
+    margin: 10px 100px 0 0;
+}
+a{
+    color: #4e8180 !important;
+}
+.box-primary-create{
+    height:10rem;
+    margin-top:70px;
+    padding: 40px 0px 0px 30px;
+    border:3px solid #4e8180;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: transparent;
+    color: #4e8180;
+}
+
+.tabs .indicator {
+    background-color: #4e8180;
+}
+
+.tab-slide{
+    height: 40vh;
+    margin-top: 15px;
+}
