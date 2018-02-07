@@ -31,7 +31,7 @@
                 <div class="divider"></div>
             </li>
 
-            <li class="waves-effect"><a @click.prevent="logout()"><i class="material-icons" style="color:#E6CC38">build</i>Logouti</a>
+            <li class="waves-effect"><a @click.prevent="logout()"><i class="material-icons" style="color:black">power</i>Logout</a>
             </li>
             <li><a class="side-footer waves-effect"></a></li>
 

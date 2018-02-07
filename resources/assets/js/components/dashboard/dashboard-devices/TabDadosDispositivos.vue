@@ -3,13 +3,18 @@
         <div class="row">
             <div class="col s12">
                 <div style="border:2px solid #4e8180; height:12rem;margin-top:40px">
-                    <h2 style="margin:2rem 0 2rem 0">Atributos do Dispositivo</h2>
+                    <h2 style="margin:2rem 0 2rem 0">Adicionar nova variavel</h2>
                     <form class="col s12">
                         <div class="row" style="margin-bottom:0px">
                             <div class="input-field col s6">
-                                <input placeholder="Tipo" id="tipo" type="text" class="validate">
-                                <label class="active" for="tipo" style="text-transform:uppercase">Identificador
-                                    do Dispositivo</label>
+                                <select>
+                                    <option value="" disabled selected>Selecione o tipo</option>
+                                    <option value="1">float</option>
+                                    <option value="2">int</option>
+                                    <option value="3">boolean</option>
+                                    <option value="3">String</option>
+                                </select>
+                                <label>Tipo</label>
                             </div>
                             <div class="input-field col s6">
                                 <input placeholder="Topico" id="topico" type="text" class="validate">
@@ -54,7 +59,9 @@
         name: "tab-dados-dispositivos",
         props: ['dispositivo'],
         mounted() {
-            $('ul.tabs').tabs()
+            $('ul.tabs').tabs();
+            $('select').material_select();
+
         }
     }
 </script>

@@ -39314,11 +39314,11 @@ var render = function() {
                 "i",
                 {
                   staticClass: "material-icons",
-                  staticStyle: { color: "#E6CC38" }
+                  staticStyle: { color: "black" }
                 },
-                [_vm._v("build")]
+                [_vm._v("power")]
               ),
-              _vm._v("Logouti")
+              _vm._v("Logout")
             ]
           )
         ]),
@@ -40305,6 +40305,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40312,6 +40317,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['dispositivo'],
     mounted: function mounted() {
         $('ul.tabs').tabs();
+        $('select').material_select();
     }
 });
 
@@ -40366,7 +40372,7 @@ var staticRenderFns = [
           },
           [
             _c("h2", { staticStyle: { margin: "2rem 0 2rem 0" } }, [
-              _vm._v("Atributos do Dispositivo")
+              _vm._v("Adicionar nova variavel")
             ]),
             _vm._v(" "),
             _c("form", { staticClass: "col s12" }, [
@@ -40375,24 +40381,29 @@ var staticRenderFns = [
                 { staticClass: "row", staticStyle: { "margin-bottom": "0px" } },
                 [
                   _c("div", { staticClass: "input-field col s6" }, [
-                    _c("input", {
-                      staticClass: "validate",
-                      attrs: { placeholder: "Tipo", id: "tipo", type: "text" }
-                    }),
+                    _c("select", [
+                      _c(
+                        "option",
+                        { attrs: { value: "", disabled: "", selected: "" } },
+                        [_vm._v("Selecione o tipo")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("float")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [_vm._v("int")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("boolean")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("String")
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "active",
-                        staticStyle: { "text-transform": "uppercase" },
-                        attrs: { for: "tipo" }
-                      },
-                      [
-                        _vm._v(
-                          "Identificador\n                                do Dispositivo"
-                        )
-                      ]
-                    )
+                    _c("label", [_vm._v("Tipo")])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "input-field col s6" }, [
