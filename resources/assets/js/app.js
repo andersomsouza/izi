@@ -4,8 +4,8 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-import './bootstrap';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.css';
 
 import APIHelper from './domain/Helpers/APIHelper';
 import Vue from 'vue';
