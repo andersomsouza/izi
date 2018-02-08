@@ -1,58 +1,56 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
-
-                    <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="/login" @submit.prevent="login()">
-
-
-                            <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember" > Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <p v-if="error" style="color:red"> {{error}}</p>
-                                    <button type="submit" class="btn btn-primary">
-                                        Login
-                                    </button>
-
-                                    <a class="btn btn-link" href="">
-                                        Esqueceu a senha ?
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
+<div id="login-page">
+    <div  class="row form-wrapper">
+        <div class="col s12 push-m3 push-l4 m6 l4 card-panel">
+            <form @click.prevent="login()" >
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">mail_outline</i>
+                        <input name="email" class="validate" id="email" type="email">
+                        <label for="email" data-error="wrong" data-success="right">Email</label>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input name="password" id="password" type="password">
+                        <label for="password">Senha</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12  login-text">
+                        <input name="remember-me" type="checkbox" id="remember-me" />
+                        <label for="remember-me">Lembrar me</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col s12">
+                       <p v-show="error">{{ error }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="submit"  value="Login" class="btn waves-effect waves-light col s12" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6 m6 l6">
+                        <p class="margin medium-small"><a href="#">Cadastre-se!</a></p>
+                    </div>
+                    <div class="input-field col s6 m6 l6">
+                        <p class="margin right-align medium-small"><a href="#">Esqueceu a senha?</a></p>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
+
+</div>
+
+
 </template>
 
 <script>
@@ -90,5 +88,13 @@
 </script>
 
 <style scoped>
+ #login-page{
+     height: 100vh;
+ }
+    .form-wrapper{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
 
+    }
 </style>

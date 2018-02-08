@@ -39,9 +39,7 @@
 </script>
 <style>
 
-    body {
-        padding-left: 300px;
-    }
+
 
     @media only screen and (max-width: 992px) {
         body {

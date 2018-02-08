@@ -3,10 +3,13 @@
         <izi-sidebar>
 
         </izi-sidebar>
-        <router-view>
+        <div class="padding-view">
+            <router-view>
 
-        </router-view>
-    </div>
+            </router-view>
+
+        </div>
+         </div>
 </template>
 
 <script>
@@ -44,6 +47,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped="">
+   .padding-view {
+        padding-left: 300px;
+    }
 </style>
