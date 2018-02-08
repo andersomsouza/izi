@@ -1,5 +1,5 @@
 <template>
-    <div :id="dispositivo.id" class="col s12 tab-slide">
+    <div :id="dispositivo.name" class="col s12 tab-slide">
         <div class="row">
             <div class="col s12">
                 <div style="border:2px solid #4e8180; height:12rem;margin-top:40px">
@@ -34,16 +34,18 @@
             <thead>
             <tr>
                 <th>Identificador</th>
+                <th>Etiqueta</th>
                 <th>Tipo</th>
                 <th>Tópico</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr v-for="dado of dispositivo.dados">
+            <tr v-for="dado of dispositivo.devicedata">
                 <td>{{dado.id}}</td>
-                <td>{{dado.tipo}}</td>
-                <td>{{dado.topico}}</td>
+                <td>{{dado.label}}</td>
+                <td>{{dado.type}}</td>
+                <td>{{dado.topic}}</td>
             </tr>
 
             </tbody>

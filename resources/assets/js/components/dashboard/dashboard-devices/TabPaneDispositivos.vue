@@ -4,7 +4,7 @@
         <div class="col s12">
             <ul class="tabs" style="margin-top:2rem">
                 <li class="tab col s2" v-for="dispositivo of dispositivos" v-bind:key="dispositivo.id"><a class=""
-                                                                                                          :href="dispositivoUrl(dispositivo.id)">{{dispositivo.id}}</a>
+                                                                                                          :href="dispositivoUrl(dispositivo.name)">{{dispositivo.id}}</a>
                 </li>
             </ul>
         </div>
@@ -16,49 +16,23 @@
 </template>
 
 <script>
-    let dispositivos = [
-        {
-            id: "disp1",
-            dados:[
-                {
-                    id: "temperatura",
-                    tipo: "float",
-                    topico: "temperatura_valor"
-
-                },
-                {
-                    id: "umidade",
-                    tipo: "float",
-                    topico: "umid_valor"
-
-                }
-            ]
-        },
-        {
-            id: "disp2",
-            dados:[
-                {
-                    id: "quantidade de moedas",
-                    tipo: "int",
-                    topico: "moedas_qtde"
-
-                },
-                {
-                    id: "sensor indutivo",
-                    tipo: "boolean",
-                    topico: "sensor_ativ"
-
-                }
-            ]
-        }]
+    import APIHelper from "../../../domain/Helpers/APIHelper";
     import TabDadosDispositivos from './TabDadosDispositivos.vue';
+
+    let $apiHelper = new APIHelper();
 
     export default {
         name: "dispositivos",
         data() {
             return {
-                dispositivos
+                dispositivos: []
             }
+        },
+        created() {
+            if (!this.$root.dispositivos) $apiHelper._get('/api/v1/devices')
+                .then((r) => r.json())
+                .then(json => this.dispositivos = json)
+            this.dispositivos = this.$root.dispositivos;
         },
         components: {'izi-tab-dispositivos': TabDadosDispositivos},
         mounted() {

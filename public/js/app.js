@@ -39798,8 +39798,9 @@ exports.push([module.i, "\n.box-primary-create[data-v-5d16dd18] {\n    height: 1
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue__);
 //
 //
 //
@@ -39818,44 +39819,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var dispositivos = [{
-    id: "disp1",
-    dados: [{
-        id: "temperatura",
-        tipo: "float",
-        topico: "temperatura_valor"
 
-    }, {
-        id: "umidade",
-        tipo: "float",
-        topico: "umid_valor"
 
-    }]
-}, {
-    id: "disp2",
-    dados: [{
-        id: "quantidade de moedas",
-        tipo: "int",
-        topico: "moedas_qtde"
 
-    }, {
-        id: "sensor indutivo",
-        tipo: "boolean",
-        topico: "sensor_ativ"
-
-    }]
-}];
-
+var $apiHelper = new __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "dispositivos",
     data: function data() {
         return {
-            dispositivos: dispositivos
+            dispositivos: []
         };
     },
+    created: function created() {
+        var _this = this;
 
-    components: { 'izi-tab-dispositivos': __WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue___default.a },
+        if (!this.$root.dispositivos) $apiHelper._get('/api/v1/devices').then(function (r) {
+            return r.json();
+        }).then(function (json) {
+            return _this.dispositivos = json;
+        });
+        this.dispositivos = this.$root.dispositivos;
+    },
+
+    components: { 'izi-tab-dispositivos': __WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue___default.a },
     mounted: function mounted() {
         $('ul.tabs').tabs();
     },
@@ -40019,6 +40006,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40040,7 +40029,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col s12 tab-slide", attrs: { id: _vm.dispositivo.id } },
+    { staticClass: "col s12 tab-slide", attrs: { id: _vm.dispositivo.name } },
     [
       _vm._m(0),
       _vm._v(" "),
@@ -40049,13 +40038,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.dispositivo.dados, function(dado) {
+          _vm._l(_vm.dispositivo.devicedata, function(dado) {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(dado.id))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dado.tipo))]),
+              _c("td", [_vm._v(_vm._s(dado.label))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dado.topico))])
+              _c("td", [_vm._v(_vm._s(dado.type))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dado.topic))])
             ])
           })
         )
@@ -40182,6 +40173,8 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Identificador")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Etiqueta")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Tipo")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tópico")])
@@ -40221,7 +40214,7 @@ var render = function() {
               [
                 _c(
                   "a",
-                  { attrs: { href: _vm.dispositivoUrl(dispositivo.id) } },
+                  { attrs: { href: _vm.dispositivoUrl(dispositivo.name) } },
                   [_vm._v(_vm._s(dispositivo.id))]
                 )
               ]

@@ -15,8 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// rotas de login e logout
 Route::get('/login','Auth\LoginController@getLogin');
 Route::get('/logout','Auth\LoginController@logout')->middleware('auth');
 Route::post('/login','Auth\LoginController@login');
+
+// api rest devices
+Route::prefix('/api/v1')->group(function () {
+    Route::get('devices', function () {
+       return response()->json(Auth::user()->devices()->with('devicedata')->get());
+    });
+});//->middleware('auth');
+
 
 Route::get('/home', 'HomeController@index')->name('home');

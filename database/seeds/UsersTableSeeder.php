@@ -21,5 +21,12 @@ class UsersTableSeeder extends Seeder
 
         factory(App\User::class, 1)->create();
 
+        factory(App\Device::class, 5)->create()->each(function (App\Device $dev) {
+            for ($i = 0; $i < 3; $i++) {
+                $dev->deviceData()->save(factory(App\DeviceData::class)->make());
+            }
+        });
+
+
     }
 }
