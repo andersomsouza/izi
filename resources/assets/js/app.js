@@ -5,6 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import 'materialize-css';
+import 'chartist/dist/chartist.css'
 import 'materialize-css/dist/css/materialize.css';
 
 import APIHelper from './domain/Helpers/APIHelper';
