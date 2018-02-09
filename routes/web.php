@@ -22,9 +22,7 @@ Route::post('/login','Auth\LoginController@login');
 
 // api rest devices
 Route::prefix('/api/v1')->group(function () {
-    Route::get('devices', function () {
-       return response()->json(Auth::user()->devices()->with('devicedata')->get());
-    });
+    Route::get('devices', 'DeviceController@getDevices');
 });//->middleware('auth');
 
 
