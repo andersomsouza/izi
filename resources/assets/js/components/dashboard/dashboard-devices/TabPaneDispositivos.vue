@@ -3,12 +3,12 @@
     <div class="row">
         <div class="col s12">
             <ul class="tabs" style="margin-top:2rem">
-                <li class="tab col s2" v-for="dispositivo of dispositivos" v-bind:key="dispositivo.id"><a class=""
-                                                                                                          :href="dispositivoUrl(dispositivo.name)">{{dispositivo.id}}</a>
+                <li class="tab col s2" v-for="dispositivo in dispositivos" v-bind:key="dispositivo.id"><a class=""
+                                                                                                          :href="dispositivoUrl(dispositivo.name)">{{dispositivo.name}}</a>
                 </li>
             </ul>
         </div>
-        <izi-tab-dispositivos v-for="dispositivo of dispositivos" :dispositivo="dispositivo"
+        <izi-tab-dispositivos v-for="dispositivo in dispositivos" :dispositivo="dispositivo"
                               v-bind:key="dispositivo.id"></izi-tab-dispositivos>
     </div>
 

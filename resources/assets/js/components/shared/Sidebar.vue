@@ -33,7 +33,8 @@
 
             <li class="waves-effect"><a @click.prevent="logout()"><i class="material-icons" style="color:black">power</i>Logout</a>
             </li>
-            <li><a class="side-footer waves-effect"></a></li>
+            <li  class="center side-footer waves-effect blue-grey-text text-lighten-4
+">IZI -  plataforma IoT 100% brasileira</li>
 
         </ul>
 
@@ -62,7 +63,7 @@
 
 <style scoped>
     .side-nav li>a {
-        margin: 1rem 0 1rem 0;
+        margin: 0.5rem 0 0.5rem 0;
         color: rgba(0,0,0,0.87);
         display: block;
         font-size: 14px;

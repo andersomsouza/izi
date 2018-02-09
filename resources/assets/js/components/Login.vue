@@ -1,10 +1,14 @@
 <template>
 <div id="login-page">
     <div  class="row form-wrapper">
+        <div class="row">
+            <h1 class="izi-logo">
+                IZI
+            </h1>
+        </div>
         <div class="col s12 push-m3 push-l4 m6 l4 card-panel">
-            <form @click.prevent="login()" >
-                <div class="row">
-                </div>
+            <form @submit.prevent="login()" >
+                <div class="row"></div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">mail_outline</i>
@@ -20,16 +24,17 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class=" col s12">
+                        <p v-show="error" style="color: red">{{ error }}</p>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s12 m12 l12  login-text">
                         <input name="remember-me" type="checkbox" id="remember-me" />
                         <label for="remember-me">Lembrar me</label>
                     </div>
                 </div>
-                <div class="row">
-                    <div class=" col s12">
-                       <p v-show="error">{{ error }}</p>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="input-field col s12">
                         <input type="submit"  value="Login" class="btn waves-effect waves-light col s12" >
@@ -71,6 +76,7 @@
         } ,
         methods:{
             login(){
+                console.log("Loga submit");
                 let formData = new FormData(document.querySelector('form'));
                 loginConroller.login(formData)
                     .then((json)=>{
@@ -95,6 +101,13 @@
         position: relative;
         top: 50%;
         transform: translateY(-50%);
+
+    }
+    .izi-logo{
+        margin:0;
+        font-family: Raleway;
+        font-size: 62px;
+        color: #797979;
 
     }
 </style>
