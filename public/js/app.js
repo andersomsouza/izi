@@ -38567,7 +38567,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n#login-page[data-v-01e7f602]{\n    height: 100vh;\n}\n.form-wrapper[data-v-01e7f602]{\n       position: relative;\n       top: 50%;\n       transform: translateY(-50%);\n}\n", ""]);
+exports.push([module.i, "\n#login-page[data-v-01e7f602]{\n    height: 100vh;\n}\n.form-wrapper[data-v-01e7f602]{\n       position: relative;\n       top: 50%;\n       transform: translateY(-50%);\n}\n.izi-logo[data-v-01e7f602]{\n       margin:0;\n       font-family: Raleway;\n       font-size: 62px;\n       color: #797979;\n}\n", ""]);
 
 // exports
 
@@ -38579,6 +38579,11 @@ exports.push([module.i, "\n#login-page[data-v-01e7f602]{\n    height: 100vh;\n}\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain_Controllers_LoginController__ = __webpack_require__(4);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38654,6 +38659,7 @@ var loginConroller = new __WEBPACK_IMPORTED_MODULE_0__domain_Controllers_LoginCo
         login: function login() {
             var _this = this;
 
+            console.log("Loga submit");
             var formData = new FormData(document.querySelector('form'));
             loginConroller.login(formData).then(function (json) {
                 console.log(json);
@@ -38678,12 +38684,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "login-page" } }, [
     _c("div", { staticClass: "row form-wrapper" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "col s12 push-m3 push-l4 m6 l4 card-panel" }, [
         _c(
           "form",
           {
             on: {
-              click: function($event) {
+              submit: function($event) {
                 $event.preventDefault()
                 _vm.login()
               }
@@ -38691,8 +38699,6 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "row" }),
-            _vm._v(" "),
-            _vm._m(0),
             _vm._v(" "),
             _vm._m(1),
             _vm._v(" "),
@@ -38710,7 +38716,8 @@ var render = function() {
                         value: _vm.error,
                         expression: "error"
                       }
-                    ]
+                    ],
+                    staticStyle: { color: "red" }
                   },
                   [_vm._v(_vm._s(_vm.error))]
                 )
@@ -38719,7 +38726,9 @@ var render = function() {
             _vm._v(" "),
             _vm._m(3),
             _vm._v(" "),
-            _vm._m(4)
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5)
           ]
         )
       ])
@@ -38727,6 +38736,16 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("h1", { staticClass: "izi-logo" }, [
+        _vm._v("\r\n                IZI\r\n            ")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -39123,7 +39142,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.side-nav li>a[data-v-836bd148] {\n    margin: 1rem 0 1rem 0;\n    color: rgba(0,0,0,0.87);\n    display: block;\n    font-size: 14px;\n    font-weight: 500;\n    height: 48px;\n    line-height: 48px;\n    padding: 0 32px;\n}\n.side-nav[data-v-836bd148]{\n    overflow: hidden;\n}\n.side-nav[data-v-836bd148]:hover{\n    overflow: auto;\n}\n.side-footer[data-v-836bd148]{\n    margin: 0px !important;\n    background-color: #263238;\n    position: fixed;\n    bottom: 0px;\n    margin-right: auto !important;\n    margin-left: auto !important;\n    width: 100%;\n    padding: 0px !important;\n    cursor: inherit;\n}\n.side-footer[data-v-836bd148]:hover{\n    background-color: #263238 !important;\n}\n.side-nav li>a[data-v-836bd148]:hover {\n    background-color: transparent;\n}\n.side-nav .divider[data-v-836bd148] {\n    margin: 0;\n}\n.side-nav li[data-v-836bd148]{\n    width: 100%;\n}\n.side-nav li[data-v-836bd148]:hover {\n    background-color: rgba(0,0,0,0.05);\n}\n\n", ""]);
+exports.push([module.i, "\n.side-nav li>a[data-v-836bd148] {\n    margin: 0.5rem 0 0.5rem 0;\n    color: rgba(0,0,0,0.87);\n    display: block;\n    font-size: 14px;\n    font-weight: 500;\n    height: 48px;\n    line-height: 48px;\n    padding: 0 32px;\n}\n.side-nav[data-v-836bd148]{\n    overflow: hidden;\n}\n.side-nav[data-v-836bd148]:hover{\n    overflow: auto;\n}\n.side-footer[data-v-836bd148]{\n    margin: 0px !important;\n    background-color: #263238;\n    position: fixed;\n    bottom: 0px;\n    margin-right: auto !important;\n    margin-left: auto !important;\n    width: 100%;\n    padding: 0px !important;\n    cursor: inherit;\n}\n.side-footer[data-v-836bd148]:hover{\n    background-color: #263238 !important;\n}\n.side-nav li>a[data-v-836bd148]:hover {\n    background-color: transparent;\n}\n.side-nav .divider[data-v-836bd148] {\n    margin: 0;\n}\n.side-nav li[data-v-836bd148]{\n    width: 100%;\n}\n.side-nav li[data-v-836bd148]:hover {\n    background-color: rgba(0,0,0,0.05);\n}\n\n", ""]);
 
 // exports
 
@@ -39135,6 +39154,7 @@ exports.push([module.i, "\n.side-nav li>a[data-v-836bd148] {\n    margin: 1rem 0
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain_Controllers_LoginController__ = __webpack_require__(4);
+//
 //
 //
 //
@@ -39335,7 +39355,14 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(6)
+        _c(
+          "li",
+          {
+            staticClass:
+              "center side-footer waves-effect blue-grey-text text-lighten-4\n"
+          },
+          [_vm._v("IZI -  plataforma IoT 100% brasileira")]
+        )
       ]
     )
   ])
@@ -39387,12 +39414,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("div", { staticClass: "divider" })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { staticClass: "side-footer waves-effect" })])
   }
 ]
 render._withStripped = true
@@ -40008,6 +40029,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40016,6 +40050,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         $('ul.tabs').tabs();
         $('select').material_select();
+        $('.collapsible').collapsible();
     }
 });
 
@@ -40059,111 +40094,153 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col s12" }, [
-        _c(
-          "div",
-          {
-            staticStyle: {
-              border: "2px solid #4e8180",
-              height: "12rem",
-              "margin-top": "40px"
-            }
-          },
-          [
-            _c("h2", { staticStyle: { margin: "2rem 0 2rem 0" } }, [
-              _vm._v("Adicionar nova variavel")
+    return _c(
+      "ul",
+      {
+        staticClass: "collapsible popout",
+        attrs: { "data-collapsible": "accordion" }
+      },
+      [
+        _c("li", [
+          _c("div", { staticClass: "collapsible-header" }, [
+            _c("i", { staticClass: "material-icons" }, [
+              _vm._v("filter_drama")
             ]),
-            _vm._v(" "),
-            _c("form", { staticClass: "col s12" }, [
-              _c(
-                "div",
-                { staticClass: "row", staticStyle: { "margin-bottom": "0px" } },
-                [
-                  _c("div", { staticClass: "input-field col s6" }, [
-                    _c("select", [
-                      _c(
-                        "option",
-                        { attrs: { value: "", disabled: "", selected: "" } },
-                        [_vm._v("Selecione o tipo")]
-                      ),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "1" } }, [
-                        _vm._v("float")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2" } }, [_vm._v("int")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "3" } }, [
-                        _vm._v("boolean")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "3" } }, [
-                        _vm._v("String")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("label", [_vm._v("Tipo")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-field col s6" }, [
-                    _c("input", {
-                      staticClass: "validate",
-                      attrs: {
-                        placeholder: "Topico",
-                        id: "topico",
-                        type: "text"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "active",
-                        staticStyle: { "text-transform": "uppercase" },
-                        attrs: { for: "topico" }
-                      },
-                      [
-                        _vm._v(
-                          "Identificador\n                                do Dispositivo"
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
+            _vm._v("Adicionar nova variavel")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "collapsible-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("form", { attrs: { action: "" } }, [
+                _c("div", { staticClass: "col s12" }, [
                   _c(
-                    "a",
+                    "div",
                     {
-                      staticClass: "btn-floating btn-medium",
                       staticStyle: {
-                        position: "relative",
-                        "margin-left": "45rem",
-                        "margin-top": "-10px",
-                        width: "50px",
-                        height: "50px"
+                        border: "2px solid #4e8180",
+                        height: "12rem",
+                        "margin-top": "40px"
                       }
                     },
                     [
                       _c(
-                        "i",
+                        "div",
                         {
-                          staticClass: "large material-icons",
+                          staticClass: "col s12",
                           staticStyle: {
-                            "font-size": "2rem",
-                            "line-height": "50px"
+                            top: "50%",
+                            position: "relative",
+                            transform: "translateY(-50%)"
                           }
                         },
-                        [_vm._v("add")]
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "row",
+                              staticStyle: { "margin-bottom": "0px" }
+                            },
+                            [
+                              _c("div", { staticClass: "input-field col s6" }, [
+                                _c("select", [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        disabled: "",
+                                        selected: ""
+                                      }
+                                    },
+                                    [_vm._v("Selecione o tipo")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "1" } }, [
+                                    _vm._v("float")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "2" } }, [
+                                    _vm._v("int")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "3" } }, [
+                                    _vm._v("boolean")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "3" } }, [
+                                    _vm._v("String")
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("label", [_vm._v("Tipo")])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "input-field col s6" }, [
+                                _c("input", {
+                                  staticClass: "validate",
+                                  attrs: {
+                                    placeholder: "Topico",
+                                    id: "topico",
+                                    type: "text"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "active",
+                                    staticStyle: {
+                                      "text-transform": "uppercase"
+                                    },
+                                    attrs: { for: "topico" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Identificador\n                                                do Dispositivo"
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn-floating btn-medium",
+                          staticStyle: {
+                            position: "absolute",
+                            bottom: "0",
+                            right: "100px",
+                            width: "50px",
+                            height: "50px"
+                          }
+                        },
+                        [
+                          _c(
+                            "i",
+                            {
+                              staticClass: "large material-icons",
+                              staticStyle: {
+                                "font-size": "2rem",
+                                "line-height": "50px"
+                              }
+                            },
+                            [_vm._v("add")]
+                          )
+                        ]
                       )
                     ]
                   )
-                ]
-              )
+                ])
+              ])
             ])
-          ]
-        )
-      ])
-    ])
+          ])
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -40215,7 +40292,7 @@ var render = function() {
                 _c(
                   "a",
                   { attrs: { href: _vm.dispositivoUrl(dispositivo.name) } },
-                  [_vm._v(_vm._s(dispositivo.id))]
+                  [_vm._v(_vm._s(dispositivo.name))]
                 )
               ]
             )
