@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
-    protected $fillable =['id','name'];
+    protected $fillable =['name'];
 
     public function deviceData()
     {

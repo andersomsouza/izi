@@ -23,6 +23,11 @@ Route::post('/login','Auth\LoginController@login');
 // api rest devices
 Route::prefix('/api/v1')->group(function () {
     Route::get('devices', 'DeviceController@getDevices');
+    Route::post('devices', 'DeviceController@addDevice');
+    Route::post('devices/{id}/data', 'DeviceDataController@addDeviceData')->where('id', '[0-9]+');
+    Route::delete('devices/{id}', 'DeviceController@remove')->where('id', '[0-9]+');
+
+
 });//->middleware('auth');
 
 
