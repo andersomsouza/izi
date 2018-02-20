@@ -47,28 +47,12 @@
         }
     }
 
-    h1 {
-        display: block;
-        margin-top: 1.5rem;
-        text-align: center;
-        font-weight: normal;
-        font-size: 35px;
-        line-height: 1em;
+
+
+    h1,h2,h3,h4 {
+
         color: #29b7b2;
         text-transform: uppercase;
     }
 
-    h2 {
-        display: block;
-        font-weight: normal;
-        font-size: 15px;
-        line-height: 1em;
-        color: #29b7b2;
-        text-transform: uppercase;
-        margin: 10px 100px 0 0;
-    }
-
-    a {
-        color: #4e8180 !important;
-    }
 </style>

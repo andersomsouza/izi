@@ -2,22 +2,22 @@
     <div style="height:90vh" class="col s12">
         <div class="row center" style="margin-bottom:0px">
             <div class="row">
-                <h1>Adicionar Dispositivos</h1>
+                <h2>Dispositivos</h2>
                 <div class="divider" style="width:30%;margin-left:35%; height:2px ;background-color:#29b7b2"></div>
             </div>
             <div class="col offset-s3 s6"
                  style="height:7rem; margin-top:10px;padding: 17px 0px 0px 50px; border:3px solid #29b7b2">
                 <div class="row">
-                    <form class="col s12">
+                    <form id="formAddDispositivo" class="col s12">
                         <div class="row">
                             <div class="input-field col s8">
-                                <input placeholder="ID" id="first_name" type="text" class="validate">
-                                <label class="active" for="first_name" style="text-transform:uppercase">Identificador do
+                                <input placeholder="Nome" id="name" name="name" class="validate" v-model="dispositivo.name">
+                                <label class="active" for="name" style="text-transform:uppercase">Nome do
                                     Dispositivo</label>
                             </div>
                             <a class="btn-floating btn-medium"
                                style="position: relative;margin-left:3rem;margin-top:51px;width:50px; height:50px">
-                                <i class="large material-icons" style="font-size: 2rem;line-height: 50px;">add</i>
+                                <i class="large material-icons" style="font-size: 2rem;line-height: 50px;" @click.prevent="adicionarDispositivo()">add</i>
                             </a>
                         </div>
                     </form>
@@ -32,13 +32,35 @@
 
 <script>
     import TabDispositivos from './TabPaneDispositivos.vue';
+    import APIHelper from "../../../domain/Helpers/APIHelper";
+    let $apiHelper = new APIHelper();
+
     export default {
         name: "dispositivos",
+        data(){
+            return {
+                dispositivo:{
+                    name: ""
+                }
+            }
+        },
         components:{
             "izi-tab-dispositivos": TabDispositivos
         },
         mounted() {
             $('ul.tabs').tabs()
+        },
+        methods:{
+            adicionarDispositivo(){
+
+                let formData = new FormData();
+                formData.append('name', this.dispositivo.name)
+                $apiHelper._post('/api/v1/devices', {body: formData})
+                    .then(r=>r.json())
+                    .then(r=>{if(!r.error){
+                        this.$root.dispositivos = r;
+                    }});
+            }
         }
     }
 </script>

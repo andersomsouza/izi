@@ -19,12 +19,14 @@ export default class APIHelper {
 
     __fetch(path, ...userConfig) {
         let config;
+
         if (userConfig) {
             config = {};
             Object.assign(config, ...userConfig, this.defaultConfiguration);
         } else {
             config = this.defaultConfiguration;
         }
+        console.log(config)
         return fetch(path, config);
 
     }
