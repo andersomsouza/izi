@@ -7,7 +7,7 @@
                 <i class="material-icons">menu</i>
             </a>
             <ul style="padding-left: 300px;color: white !important;">
-                <li><a class="waves-effect waves-light red" onclick="$('#modal1').modal('open')">Adicionar dado</a></li>
+                <li><a class="waves-effect waves-light red" @click="adicionarDado()">Adicionar dado</a></li>
                 <li><a class="waves-effect waves-light yellow darken-1" @click.prevent="removerDispositivo()">Remover Dispositivo</a>
                 </li>
             </ul>
@@ -26,7 +26,10 @@
             <tbody>
             <tr v-for="dado of dispositivo.devicedata">
                 <td>{{dado.id}}</td>
-                <td>{{dado.label}}</td>
+                <td>{{dado.label}} <div  @click.prevent="removerDado(dado)" class=" bolinha red white-text">
+                    <i class="material-icons">close</i>
+                </div>
+                </td>
                 <td>{{dado.type}}</td>
                 <td>{{dado.topic}}</td>
             </tr>
@@ -40,9 +43,6 @@
 
 <script>
 
-    import APIHelper from "../../../domain/Helpers/APIHelper";
-
-    let $apiHelper = new APIHelper();
     export default {
         name: "tab-dados-dispositivos",
         props: ['dispositivo'],
@@ -54,14 +54,25 @@
         },
         methods: {
             removerDispositivo() {
-                $apiHelper._delete(`/api/v1/devices/${this.dispositivo.id}`)
+                this.$root.shared.apiHelper._delete(`/api/v1/devices/${this.dispositivo.id}`)
                     .then(r => r.json())
                     .then(r => {
-                        if (!r.error){
-                            this.$root.dispositivos = r;
-                            this.$parent.dispositivos = r;
-                        }
+                        this.$root.shared.bus.$emit('atualizar-dispositivos', r)
                     })
+            },
+            adicionarDado() {
+                console.log(this.dispositivo);
+                this.$root.shared.bus.$emit('dispositivo-selecionado', this.dispositivo);
+                $('#modal1').modal('open');
+
+            },
+            removerDado(dado){
+                this.$root.shared.apiHelper._delete(`/api/v1/devices/${this.dispositivo.id}/data/${dado.id}`)
+                    .then(r => r.json())
+                    .then(r => {
+                        this.$root.shared.bus.$emit('atualizar-dispositivos', r)
+                    })
+
             }
         }
 
@@ -88,5 +99,11 @@
     .tab-slide {
         height: 40vh;
         margin-top: 15px;
+    }
+    .bolinha{
+        line-height: 0;
+        display: inline-block;
+        border-radius: 50%;
+        cursor: pointer;
     }
 </style>

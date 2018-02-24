@@ -24,7 +24,10 @@ const app = new Vue({
     router,
     data(){
         return {
-            shared: new APIHelper()
+            shared: {
+                apiHelper: new APIHelper(),
+                bus: new Vue()
+            }
         }
 
     },

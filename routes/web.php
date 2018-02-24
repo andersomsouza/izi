@@ -26,6 +26,7 @@ Route::prefix('/api/v1')->group(function () {
     Route::post('devices', 'DeviceController@addDevice');
     Route::post('devices/{id}/data', 'DeviceDataController@addDeviceData')->where('id', '[0-9]+');
     Route::delete('devices/{id}', 'DeviceController@remove')->where('id', '[0-9]+');
+    Route::delete('devices/{device_id}/data/{devicedata_id}', 'DeviceDataController@removeDeviceData')->where(['device_id'=> '[0-9]+', 'device'=>'[0-9]+']);
 
 
 });//->middleware('auth');

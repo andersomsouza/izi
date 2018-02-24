@@ -9,8 +9,6 @@
 
 <script>
     import DispositivoView from './DispositivoView.vue'
-    import APIHelper from "../../../domain/Helpers/APIHelper";
-    let $apiHelper = new APIHelper();
     export default {
         name: "home",
         components:{
@@ -34,10 +32,15 @@
             }
         },
         created(){
-            if (!this.$root.dispositivos) $apiHelper._get('/api/v1/devices')
+            this.$root.shared.bus.$on('atualizar-dispositivos',(dispositivos) =>{
+                this.dispositivos = dispositivos;
+            });
+            if (!this.$root.dispositivos) this.$root.shared.apiHelper._get('/api/v1/devices')
                 .then((r) => r.json())
                 .then(json =>
-                {this.$root.dispositivos = this.dispositivos = json});
+                {this.$root.shared.bus.$emit('atualizar-dispositivos', json) });
+            else
+                this.dispositivos = this.$root.dispositivos ;
 
         }
 

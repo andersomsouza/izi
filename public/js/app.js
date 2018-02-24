@@ -547,8 +547,8 @@ var APIHelper = function () {
         }
     }, {
         key: '_delete',
-        value: function _delete(path) {
-            return this.__fetch(path, { method: "DELETE" });
+        value: function _delete(path, userConfig) {
+            return this.__fetch(path, { method: "DELETE" }, userConfig);
         }
     }]);
 
@@ -11510,7 +11510,10 @@ var app = new __WEBPACK_IMPORTED_MODULE_4_vue___default.a({
     router: router,
     data: function data() {
         return {
-            shared: new __WEBPACK_IMPORTED_MODULE_3__domain_Helpers_APIHelper__["a" /* default */]()
+            shared: {
+                apiHelper: new __WEBPACK_IMPORTED_MODULE_3__domain_Helpers_APIHelper__["a" /* default */](),
+                bus: new __WEBPACK_IMPORTED_MODULE_4_vue___default.a()
+            }
         };
     },
 
@@ -38616,7 +38619,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n#login-page[data-v-01e7f602]{\n    height: 100vh;\n}\n.form-wrapper[data-v-01e7f602]{\n       position: relative;\n       top: 50%;\n       transform: translateY(-50%);\n}\n.izi-logo[data-v-01e7f602]{\n       margin:0;\n       font-family: Raleway;\n       font-size: 62px;\n       color: #797979;\n}\n", ""]);
+exports.push([module.i, "\n#login-page[data-v-01e7f602]{\n    height: 100vh;\n}\n.form-wrapper[data-v-01e7f602]{\n       position: relative;\n       top: 50%;\n       transform: translateY(-50%);\n}\n.izi-logo[data-v-01e7f602]{\n       margin:0;\n       font-family: Raleway;\n       font-size: 62px;\n       color: #797979;\n       text-align: center;\n       animation: spin-data-v-01e7f602 4s ease-in-out infinite alternate;\n       display: inline-block;\n}\n@keyframes spin-data-v-01e7f602 {\n0%  {transform: rotate(0deg);\n}\n100% {transform: rotate(180deg);\n}\n}\n\n", ""]);
 
 // exports
 
@@ -38628,8 +38631,6 @@ exports.push([module.i, "\n#login-page[data-v-01e7f602]{\n    height: 100vh;\n}\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain_Controllers_LoginController__ = __webpack_require__(4);
-//
-//
 //
 //
 //
@@ -38789,11 +38790,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("h1", { staticClass: "izi-logo" }, [
-        _vm._v("\r\n                IZI\r\n            ")
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "col s12", staticStyle: { "text-align": "center" } },
+      [_c("span", { staticClass: "izi-logo" }, [_vm._v("IZI")])]
+    )
   },
   function() {
     var _vm = this
@@ -39588,7 +39589,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -39601,7 +39602,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DispositivoView_vue__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DispositivoView_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__DispositivoView_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__domain_Helpers_APIHelper__ = __webpack_require__(3);
 //
 //
 //
@@ -39613,8 +39613,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
-var $apiHelper = new __WEBPACK_IMPORTED_MODULE_1__domain_Helpers_APIHelper__["a" /* default */]();
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "home",
     components: {
@@ -39641,11 +39639,14 @@ var $apiHelper = new __WEBPACK_IMPORTED_MODULE_1__domain_Helpers_APIHelper__["a"
     created: function created() {
         var _this = this;
 
-        if (!this.$root.dispositivos) $apiHelper._get('/api/v1/devices').then(function (r) {
+        this.$root.shared.bus.$on('atualizar-dispositivos', function (dispositivos) {
+            _this.dispositivos = dispositivos;
+        });
+        if (!this.$root.dispositivos) this.$root.shared.apiHelper._get('/api/v1/devices').then(function (r) {
             return r.json();
         }).then(function (json) {
-            _this.$root.dispositivos = _this.dispositivos = json;
-        });
+            _this.$root.shared.bus.$emit('atualizar-dispositivos', json);
+        });else this.dispositivos = this.$root.dispositivos;
     }
 });
 
@@ -44469,7 +44470,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.box-primary-create[data-v-b702000e]{\n    height:10rem;\n    margin-top:70px;\n    padding: 40px 0px 0px 30px;\n    border:3px solid #4e8180;\n}\n.tabs .tab a[data-v-b702000e]:hover, .tabs .tab a.active[data-v-b702000e] {\n    background-color: transparent;\n    color: #4e8180;\n}\n.tabs .indicator[data-v-b702000e] {\n    background-color: #4e8180;\n}\n.tab-slide[data-v-b702000e]{\n    height: 40vh;\n    margin-top: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.box-primary-create[data-v-b702000e] {\n    height: 10rem;\n    margin-top: 70px;\n    padding: 40px 0px 0px 30px;\n    border: 3px solid #4e8180;\n}\n.tabs .tab a[data-v-b702000e]:hover, .tabs .tab a.active[data-v-b702000e] {\n    background-color: transparent;\n    color: #4e8180;\n}\n.tabs .indicator[data-v-b702000e] {\n    background-color: #4e8180;\n}\n.tab-slide[data-v-b702000e] {\n    height: 40vh;\n    margin-top: 15px;\n}\n", ""]);
 
 // exports
 
@@ -44482,7 +44483,8 @@ exports.push([module.i, "\n.box-primary-create[data-v-b702000e]{\n    height:10r
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TabPaneDispositivos_vue__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TabPaneDispositivos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TabPaneDispositivos_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__domain_Helpers_APIHelper__ = __webpack_require__(3);
+//
+//
 //
 //
 //
@@ -44517,8 +44519,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
-var $apiHelper = new __WEBPACK_IMPORTED_MODULE_1__domain_Helpers_APIHelper__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "dispositivos",
@@ -44543,13 +44543,12 @@ var $apiHelper = new __WEBPACK_IMPORTED_MODULE_1__domain_Helpers_APIHelper__["a"
 
             var formData = new FormData();
             formData.append('name', this.dispositivo.name);
-            $apiHelper._post('/api/v1/devices', { body: formData }).then(function (r) {
+            this.$root.shared.apiHelper._post('/api/v1/devices', { body: formData }).then(function (r) {
                 return r.json();
             }).then(function (r) {
-                if (!r.error) {
-                    _this.$root.dispositivos = r;
-                }
+                _this.$root.shared.bus.$emit('atualizar-dispositivos', r);
             });
+            this.dispositivo.name = "";
         }
     }
 });
@@ -44651,9 +44650,12 @@ exports.push([module.i, "\n.box-primary-create[data-v-5d16dd18] {\n    height: 1
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue__);
+//
+//
+//
+//
 //
 //
 //
@@ -44716,31 +44718,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
-
-var $apiHelper = new __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__["a" /* default */]();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "dispositivos",
     data: function data() {
         return {
-            dispositivos: []
+            dispositivos: [],
+            dispositivoSelecionado: {}
         };
     },
     created: function created() {
         var _this = this;
 
-        if (!this.$root.dispositivos) $apiHelper._get('/api/v1/devices').then(function (r) {
+        if (!this.$root.dispositivos) this.$root.shared.apiHelper._get('/api/v1/devices').then(function (r) {
             return r.json();
         }).then(function (json) {
-            return _this.dispositivos = json;
+            _this.$root.shared.bus.$emit('atualizar-dispositivos', json);
         });
+
         this.dispositivos = this.$root.dispositivos;
+        this.$root.shared.bus.$on('atualizar-dispositivos', function (dispositivos) {
+            if (!dispositivos.error) _this.dispositivos = dispositivos;
+        });
+        this.$root.shared.bus.$on('dispositivo-selecionado', function (dispositivo) {
+            _this.dispositivoSelecionado = dispositivo;
+        });
     },
 
-    components: { 'izi-tab-dispositivos': __WEBPACK_IMPORTED_MODULE_1__TabDadosDispositivos_vue___default.a },
+    components: { 'izi-tab-dispositivos': __WEBPACK_IMPORTED_MODULE_0__TabDadosDispositivos_vue___default.a },
     mounted: function mounted() {
-
         $('.modal').modal();
         $('ul.tabs').tabs();
     },
@@ -44748,6 +44754,19 @@ var $apiHelper = new __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__["a"
     methods: {
         dispositivoUrl: function dispositivoUrl(id) {
             return "#" + id;
+        },
+        adicionarDado: function adicionarDado() {
+            var _this2 = this;
+
+            var id = this.dispositivoSelecionado.id;
+            var formData = new FormData(document.querySelector("#formAddDadoDispositivo"));
+            this.$root.shared.apiHelper._post('/api/v1/devices/' + id + '/data', { body: formData }).then(function (r) {
+                return r.json();
+            }).then(function (json) {
+                if (!json.error) {
+                    _this2.$root.shared.bus.$emit('atualizar-dispositivos', json);
+                }
+            });
         }
     }
 });
@@ -44838,7 +44857,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.box-primary-create[data-v-54ef1a2f] {\n    height: 10rem;\n    margin-top: 70px;\n    padding: 40px 0px 0px 30px;\n    border: 3px solid #4e8180;\n}\n.tabs .tab a[data-v-54ef1a2f]:hover, .tabs .tab a.active[data-v-54ef1a2f] {\n    background-color: transparent;\n    color: #4e8180;\n}\n.tabs .indicator[data-v-54ef1a2f] {\n    background-color: #4e8180;\n}\n.tab-slide[data-v-54ef1a2f] {\n    height: 40vh;\n    margin-top: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.box-primary-create[data-v-54ef1a2f] {\n    height: 10rem;\n    margin-top: 70px;\n    padding: 40px 0px 0px 30px;\n    border: 3px solid #4e8180;\n}\n.tabs .tab a[data-v-54ef1a2f]:hover, .tabs .tab a.active[data-v-54ef1a2f] {\n    background-color: transparent;\n    color: #4e8180;\n}\n.tabs .indicator[data-v-54ef1a2f] {\n    background-color: #4e8180;\n}\n.tab-slide[data-v-54ef1a2f] {\n    height: 40vh;\n    margin-top: 15px;\n}\n.bolinha[data-v-54ef1a2f]{\n    line-height: 0;\n    display: inline-block;\n    border-radius: 50%;\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -44849,7 +44868,9 @@ exports.push([module.i, "\n.box-primary-create[data-v-54ef1a2f] {\n    height: 1
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__ = __webpack_require__(3);
+//
+//
+//
 //
 //
 //
@@ -44892,9 +44913,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
-
-var $apiHelper = new __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__["a" /* default */]();
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "tab-dados-dispositivos",
     props: ['dispositivo'],
@@ -44908,13 +44926,24 @@ var $apiHelper = new __WEBPACK_IMPORTED_MODULE_0__domain_Helpers_APIHelper__["a"
         removerDispositivo: function removerDispositivo() {
             var _this = this;
 
-            $apiHelper._delete("/api/v1/devices/" + this.dispositivo.id).then(function (r) {
+            this.$root.shared.apiHelper._delete('/api/v1/devices/' + this.dispositivo.id).then(function (r) {
                 return r.json();
             }).then(function (r) {
-                if (!r.error) {
-                    _this.$root.dispositivos = r;
-                    _this.$parent.dispositivos = r;
-                }
+                _this.$root.shared.bus.$emit('atualizar-dispositivos', r);
+            });
+        },
+        adicionarDado: function adicionarDado() {
+            console.log(this.dispositivo);
+            this.$root.shared.bus.$emit('dispositivo-selecionado', this.dispositivo);
+            $('#modal1').modal('open');
+        },
+        removerDado: function removerDado(dado) {
+            var _this2 = this;
+
+            this.$root.shared.apiHelper._delete('/api/v1/devices/' + this.dispositivo.id + '/data/' + dado.id).then(function (r) {
+                return r.json();
+            }).then(function (r) {
+                _this2.$root.shared.bus.$emit('atualizar-dispositivos', r);
             });
         }
     }
@@ -44942,7 +44971,20 @@ var render = function() {
             staticStyle: { "padding-left": "300px", color: "white !important" }
           },
           [
-            _vm._m(1),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "waves-effect waves-light red",
+                  on: {
+                    click: function($event) {
+                      _vm.adicionarDado()
+                    }
+                  }
+                },
+                [_vm._v("Adicionar dado")]
+              )
+            ]),
             _vm._v(" "),
             _c("li", [
               _c(
@@ -44964,7 +45006,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("table", [
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "tbody",
@@ -44972,7 +45014,26 @@ var render = function() {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(dado.id))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dado.label))]),
+              _c("td", [
+                _vm._v(_vm._s(dado.label) + " "),
+                _c(
+                  "div",
+                  {
+                    staticClass: " bolinha red white-text",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.removerDado(dado)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("close")
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(dado.type))]),
               _vm._v(" "),
@@ -44991,21 +45052,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "btn-floating btn-large red" }, [
       _c("i", { staticClass: "material-icons" }, [_vm._v("menu")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "waves-effect waves-light red",
-          attrs: { onclick: "$('#modal1').modal('open')" }
-        },
-        [_vm._v("Adicionar dado")]
-      )
     ])
   },
   function() {
@@ -45072,7 +45118,42 @@ var render = function() {
         })
       }),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "modal", attrs: { id: "modal1" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", [
+            _c("form", { staticClass: "row", attrs: { action: "" } }, [
+              _c("div", { staticClass: "col s12" }, [
+                _c("h4", [
+                  _vm._v(
+                    "Adicionar Dado / " +
+                      _vm._s(_vm.dispositivoSelecionado.name)
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "modal-footer" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "modal-action modal-close waves-effect waves-green btn-flat",
+              attrs: { href: "#!" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.adicionarDado()
+                }
+              }
+            },
+            [_vm._v("Adicionar")]
+          )
+        ])
+      ])
     ],
     2
   )
@@ -45082,105 +45163,81 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal", attrs: { id: "modal1" } }, [
-      _c("div", { staticClass: "modal-content" }, [
-        _c("div", [
-          _c("form", { staticClass: "row", attrs: { action: "" } }, [
-            _c("div", { staticClass: "col s12" }, [
-              _c("h4", [_vm._v("Adicionar Dado")])
+    return _c("div", { staticClass: "col s12" }, [
+      _c("form", { attrs: { action: "", id: "formAddDadoDispositivo" } }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "input-field col s12" }, [
+            _c("input", {
+              staticClass: "validate",
+              attrs: {
+                placeholder: "Etiqueta",
+                id: "label",
+                type: "text",
+                name: "label"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "active",
+                staticStyle: { "text-transform": "uppercase" },
+                attrs: { for: "label" }
+              },
+              [
+                _vm._v(
+                  "Etiqueta\n                                        do Dado"
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-field col s6" }, [
+            _c("select", { attrs: { name: "type" } }, [
+              _c(
+                "option",
+                { attrs: { value: "", disabled: "", selected: "" } },
+                [_vm._v("Selecione o tipo")]
+              ),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("float")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("int")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("boolean")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("String")])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col s12" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "input-field col s12" }, [
-                  _c("input", {
-                    staticClass: "validate",
-                    attrs: {
-                      placeholder: "Etiqueta",
-                      id: "label",
-                      type: "text",
-                      name: "label"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "active",
-                      staticStyle: { "text-transform": "uppercase" },
-                      attrs: { for: "label" }
-                    },
-                    [
-                      _vm._v(
-                        "Etiqueta\n                                    do Dado"
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-field col s6" }, [
-                  _c("select", { attrs: { name: "type" } }, [
-                    _c(
-                      "option",
-                      { attrs: { value: "", disabled: "", selected: "" } },
-                      [_vm._v("Selecione o tipo")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("float")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [_vm._v("int")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [
-                      _vm._v("boolean")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [_vm._v("String")])
-                  ]),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("Tipo")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-field col s6" }, [
-                  _c("input", {
-                    staticClass: "validate",
-                    attrs: {
-                      placeholder: "Topico",
-                      id: "topico",
-                      name: "topic",
-                      type: "text"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "active",
-                      staticStyle: { "text-transform": "uppercase" },
-                      attrs: { for: "topico" }
-                    },
-                    [
-                      _vm._v(
-                        "Topico\n                                    do Dado"
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ])
+            _c("label", [_vm._v("Tipo")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-field col s6" }, [
+            _c("input", {
+              staticClass: "validate",
+              attrs: {
+                placeholder: "Topico",
+                id: "topico",
+                name: "topic",
+                type: "text"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "active",
+                staticStyle: { "text-transform": "uppercase" },
+                attrs: { for: "topico" }
+              },
+              [
+                _vm._v(
+                  "Topico\n                                        do Dado"
+                )
+              ]
+            )
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "modal-footer" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "modal-action modal-close waves-effect waves-green btn-flat",
-            attrs: { href: "#!" }
-          },
-          [_vm._v("Adicionar")]
-        )
       ])
     ])
   }
@@ -45229,7 +45286,13 @@ var render = function() {
                   "form",
                   {
                     staticClass: "col s12",
-                    attrs: { id: "formAddDispositivo" }
+                    attrs: { id: "formAddDispositivo" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.adicionarDispositivo()
+                      }
+                    }
                   },
                   [
                     _c("div", { staticClass: "row" }, [

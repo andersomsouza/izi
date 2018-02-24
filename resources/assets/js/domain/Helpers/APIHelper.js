@@ -40,8 +40,8 @@ export default class APIHelper {
         return this.__fetch(path, {method: "POST"}, userConfig);
     }
 
-    _delete(path) {
-        return this.__fetch(path, {method: "DELETE"});
+    _delete(path, userConfig) {
+        return this.__fetch(path, {method: "DELETE"}, userConfig);
     }
 
 

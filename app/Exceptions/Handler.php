@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
         if($exception instanceof TokenMismatchException){
             return response()->json(["error"=>"Sessão expirada", "novoToken"=>session()->token(),"message"=>$exception->getMessage()],410);
         }else{
-            return response()->json(["error"=>$exception->getMessage()]);
+            return response()->json(["error"=>$exception->getMessage(), "detail"=>$exception->getTraceAsString()]);
         }
         //return parent::render($request, $exception);
     }

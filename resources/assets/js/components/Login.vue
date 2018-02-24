@@ -1,10 +1,8 @@
 <template>
 <div id="login-page">
     <div  class="row form-wrapper">
-        <div class="row">
-            <h1 class="izi-logo">
-                IZI
-            </h1>
+        <div class="col s12" style="text-align: center">
+            <span class="izi-logo">IZI</span>
         </div>
         <div class="col s12 push-m3 push-l4 m6 l4 card-panel">
             <form @submit.prevent="login()" >
@@ -108,6 +106,18 @@
         font-family: Raleway;
         font-size: 62px;
         color: #797979;
+        text-align: center;
+        animation: spin 4s ease-in-out infinite alternate;
+        display: inline-block;
 
     }
+
+
+ @keyframes spin {
+     0%  {transform: rotate(0deg);}
+     100% {transform: rotate(180deg);}
+
+
+ }
+
 </style>
