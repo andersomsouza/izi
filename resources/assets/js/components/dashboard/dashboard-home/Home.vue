@@ -24,8 +24,10 @@
                 let dispositivosData=[];
 
                 this.dispositivos.forEach((dispositivo)=>{
-                    console.log(dispositivo.devicedata)
-                    dispositivosData = dispositivosData.concat(dispositivo.devicedata);
+                    let devicedata = dispositivo.devicedata;
+                    devicedata.forEach((data)=>{data.devicename = dispositivo.name;})
+
+                    dispositivosData = dispositivosData.concat(devicedata);
                 });
 
                 return dispositivosData;

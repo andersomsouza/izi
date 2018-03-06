@@ -29,11 +29,11 @@
                                     </div>
                                     <div class="input-field col s6">
                                         <select name="type">
-                                            <option value="" disabled selected>Selecione o tipo</option>
-                                            <option value="1">float</option>
-                                            <option value="2">int</option>
-                                            <option value="3">boolean</option>
-                                            <option value="3">String</option>
+                                            <option value="none" disabled selected>Selecione o tipo</option>
+                                            <option value="float">float</option>
+                                            <option value="int">int</option>
+                                            <option value="boolean">boolean</option>
+                                            <option value="string">String</option>
                                         </select>
                                         <label>Tipo</label>
                                     </div>

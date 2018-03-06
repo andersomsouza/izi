@@ -21,3 +21,15 @@ name:"magni"
 updated_at:"2018-02-08 20:28:30"
 user_id:1}]
 ```
+
+Raspberry Server: 
+Mosquitto
+Ip 192.168.0.2
+User ander
+Pass ander123
+Porta: 1883
+WS: 1884
+
+SSH
+User pi
+Senha nescafe123

@@ -37,7 +37,7 @@
 ">IZI -  plataforma IoT 100% brasileira</li>
 
         </ul>
-
+        <a href="#" data-activates="slide-out" class="btn button-collapse"><i class="material-icons">menu</i></a>
     </div>
 </template>
 
@@ -57,6 +57,9 @@
                     .catch(redirLogin)
 
             }
+        },
+        mounted(){
+            $(".button-collapse").sideNav();
         }
     }
 </script>
